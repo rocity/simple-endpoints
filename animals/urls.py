@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls.static import static
 
 from rest_framework import routers
@@ -30,8 +30,9 @@ router.register(r'websites', WebsiteModelViewSet)
 
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
-] + router.urls
+]
 
 urlpatterns.extend(
     static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) +
